@@ -134,7 +134,7 @@
       <div class="qh-no">SOAL NO. <span id="qno">1</span></div>
       <div class="qh-right">
         <button id="btnFlag" class="flagbtn">⚑ Ragu-Ragu</button>
-        <div class="timer" id="timerBox">SISA WAKTU <span id="clock">60:00</span></div>
+        <div class="timer" id="timerBox">SISA WAKTU <span id="clock">120:00</span></div>
       </div>
     </div>
     <div id="qhost" class="qcard"></div>
@@ -487,15 +487,15 @@ QUIZ.push(
 // ===================== APP LOGIC (CBT) =====================
 (function(){
   const LETTERS=['A','B','C','D','E'];
-  const EXAM_SECONDS=60*60;
-  const LS='cbt_trauma_v1';
+  const EXAM_SECONDS=120*60;
+  const LS='cbt_trauma_v2';
   const $=id=>document.getElementById(id);
 
   function escapeHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
   function defaultOrder(){return QUIZ.map((_,i)=>i);}
   function shuffleArr(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const t=a[i];a[i]=a[j];a[j]=t;}return a;}
 
-  function fresh(){return {order:defaultOrder(),shuffle:false,answers:{},flags:{},cur:0,timeLeft:EXAM_SECONDS,started:false,finished:false};}
+  function fresh(){return {order:shuffleArr(defaultOrder()),shuffle:true,answers:{},flags:{},cur:0,timeLeft:EXAM_SECONDS,started:false,finished:false};}
 
   function load(){try{const r=localStorage.getItem(LS);return r?JSON.parse(r):null;}catch(e){return null;}}
   let S=load()||fresh();
